@@ -1,0 +1,122 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - MediWeb</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand text-primary fw-bold" asp-controller="Home" asp-action="Index">🏥 MediWeb</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        @if (User.Identity?.IsAuthenticated == true)
+                        {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Index">Inicio</a>
+                        </li>
+                        }
+ <!-- Enlace condicional para Administrador -->
+                        @if (User.IsInRole("administrador"))
+                            {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Administracion">Administración</a>
+                        </li>
+                            }
+
+ <!-- Enlace condicional para Administrador o Médico -->
+                        @if (User.IsInRole("administrador") || User.IsInRole("medico"))
+                            {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Consultas">Consultas</a>
+                        </li>
+                            }
+                        @if (User.Identity?.IsAuthenticated == true)
+{
+    <!-- Otros enlaces (Inicio, Administración, etc.) -->
+
+ <!-- Nuevo enlace general al CRUD de Citas -->
+                        <li class="nav-item">
+                            <a class="nav-link text-dark fw-bold text-primary" asp-controller="Citas" asp-action="Index">
+                                📅 Gestión de Citas
+                            </a>
+                        </li>
+}
+                        @if (User.Identity?.IsAuthenticated == true)
+{
+    <!-- Otros enlaces (Inicio, Administración, etc.) -->
+
+ <!-- Nuevo enlace general al CRUD de Citas -->
+                        <li class="nav-item">
+                            <a class="nav-link text-dark fw-bold text-primary" asp-controller="Citas" asp-action="Index">
+                                📅 Gestión de Citas
+                            </a>
+                        </li>
+}
+ <!-- Enlace condicional para Administrador o Recepcionista -->
+                        @if (User.IsInRole("administrador") || User.IsInRole("recepcionista"))
+                            {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Recepcion">Recepción</a>
+                        </li>
+                            }
+                        }
+                    </ul>
+
+                    <!-- SECCIÓN DE USUARIO Y LOGOUT MANUAL -->
+                    @if (User.Identity?.IsAuthenticated == true)
+                    {
+                    <div class="d-flex align-items-center gap-3">
+                        <span class="small text-secondary">
+                            👤 <strong>@User.Identity.Name</strong>
+                            <span class="badge bg-light text-dark border">(@User.FindFirst(System.Security.Claims.ClaimTypes.Role)?.Value)</span>
+                        </span>
+
+                        <!-- Formulario obligatorio con id="logoutForm" para cierre manual y automático -->
+                        <form id="logoutForm" asp-controller="Cuenta" asp-action="Logout" method="post" class="m-0">
+                            @Html.AntiForgeryToken()
+                            <button class="btn btn-outline-danger btn-sm" type="submit">
+                                Cerrar sesión
+                            </button>
+                        </form>
+                    </div>
+                    }
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted mt-5 py-3">
+        <div class="container text-center">
+            &copy; 2026 - MediWeb - Sistema de Gestión de Citas Clínicas
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <!-- Script de inactividad (Funciona gracias al id="logoutForm" de arriba) -->
+    @if (User.Identity?.IsAuthenticated == true)
+    {
+    <script src="~/js/idle-timeout.js" asp-append-version="true"></script>
+    }
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,47 @@
+@model Practica02MediWebMVC.Models.Cita
+@{
+    ViewData["Title"] = "Detalles de la Cita";
+}
+
+<h1>Detalles de la Cita</h1>
+<div class="card shadow-sm mt-4">
+    <div class="card-body">
+        <h4 class="card-title text-primary mb-4">Información General</h4>
+        <dl class="row mb-0">
+            <dt class="col-sm-4">Fecha y Hora</dt>
+            <dd class="col-sm-8">@Model.FechaHora.ToString("dd/MM/yyyy hh:mm tt")</dd>
+
+            <dt class="col-sm-4">Paciente</dt>
+            <dd class="col-sm-8">@Model.PacienteNombre</dd>
+
+            <dt class="col-sm-4">Médico Asignado</dt>
+            <dd class="col-sm-8">@Model.MedicoNombre</dd>
+
+            <dt class="col-sm-4">Consultorio</dt>
+            <dd class="col-sm-8">@Model.ConsultorioNombre</dd>
+
+            <dt class="col-sm-4">Estado</dt>
+            <dd class="col-sm-8">
+                <span class="badge @(Model.EstadoId == 1 ? "bg-primary" : Model.EstadoId == 2 ? "bg-success" : "bg-danger")">
+                    @Model.EstadoNombre
+                </span>
+            </dd>
+
+            <dt class="col-sm-4">Motivo de Consulta</dt>
+            <dd class="col-sm-8">@Model.Motivo</dd>
+
+            <dt class="col-sm-4">Notas Médicas</dt>
+            <dd class="col-sm-8">@(Model.NotasMedicas ?? "Sin notas registradas.")</dd>
+        </dl>
+    </div>
+</div>
+
+<div class="mt-4">
+    <a asp-action="Index" class="btn btn-secondary">Regresar a la lista</a>
+
+    <!-- Edición solo para Administradores y Médicos -->
+    @if (User.IsInRole("administrador") || User.IsInRole("medico"))
+    {
+    <a asp-action="Edit" asp-route-id="@Model.CitaId" class="btn btn-primary">Editar Cita</a>
+    }
+</div>

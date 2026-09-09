@@ -1,0 +1,68 @@
+@model Practica02MediWebMVC.Models.Cita
+@{
+    ViewData["Title"] = "Nueva Cita";
+}
+
+<h1>Programar nueva cita</h1>
+<hr />
+<form asp-action="Create" method="post" class="row g-3">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="col-md-6">
+        <label asp-for="PacienteId" class="form-label"></label>
+        <select asp-for="PacienteId" asp-items="ViewBag.Pacientes" class="form-select">
+            <option value="">Seleccione un paciente...</option>
+        </select>
+        <span asp-validation-for="PacienteId" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-6">
+        <label asp-for="MedicoId" class="form-label"></label>
+        <select asp-for="MedicoId" asp-items="ViewBag.Medicos" class="form-select">
+            <option value="">Seleccione un médico...</option>
+        </select>
+        <span asp-validation-for="MedicoId" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-4">
+        <label asp-for="ConsultorioId" class="form-label"></label>
+        <select asp-for="ConsultorioId" asp-items="ViewBag.Consultorios" class="form-select">
+            <option value="">Seleccione consultorio...</option>
+        </select>
+        <span asp-validation-for="ConsultorioId" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-4">
+        <label asp-for="FechaHora" class="form-label"></label>
+        <input asp-for="FechaHora" class="form-control" type="datetime-local" />
+        <span asp-validation-for="FechaHora" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-4">
+        <label asp-for="EstadoId" class="form-label"></label>
+        <select asp-for="EstadoId" asp-items="ViewBag.Estados" class="form-select">
+            <!-- El controlador envía el ID 1 por defecto al cargar Create -->
+        </select>
+        <span asp-validation-for="EstadoId" class="text-danger"></span>
+    </div>
+
+    <div class="col-12">
+        <label asp-for="Motivo" class="form-label"></label>
+        <input asp-for="Motivo" class="form-control" placeholder="Ej. Chequeo general, Dolor de cabeza..." />
+        <span asp-validation-for="Motivo" class="text-danger"></span>
+    </div>
+
+    <div class="col-12">
+        <label asp-for="NotasMedicas" class="form-label"></label>
+        <textarea asp-for="NotasMedicas" class="form-control" rows="3" placeholder="Observaciones preliminares..."></textarea>
+    </div>
+
+    <div class="col-12 mt-4">
+        <button type="submit" class="btn btn-success">Guardar cita</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

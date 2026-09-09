@@ -1,0 +1,44 @@
+﻿@{
+    ViewData["Title"] = "Panel principal";
+}
+<div class="container py-4">
+    <h1>Panel principal - MediWeb</h1>
+    <p>
+        Bienvenido/a, <strong>@User.Identity?.Name</strong>.
+    </p>
+    <p>
+        Rol actual en el sistema:
+        <span class="badge bg-primary fs-6">
+            @User.FindFirst(System.Security.Claims.ClaimTypes.Role)?.Value
+        </span>
+    </p>
+
+    <div class="row g-3 mt-4">
+        @if (User.IsInRole("administrador"))
+        {
+        <div class="col-md-4">
+            <a class="btn btn-dark w-100 py-3" asp-action="Administracion">
+                ⚙️ Administración del Sistema
+            </a>
+        </div>
+        }
+
+        @if (User.IsInRole("administrador") || User.IsInRole("medico"))
+        {
+        <div class="col-md-4">
+            <a class="btn btn-success w-100 py-3" asp-action="Consultas">
+                🩺 Gestión de Consultas y Expedientes
+            </a>
+        </div>
+        }
+
+        @if (User.IsInRole("administrador") || User.IsInRole("recepcionista"))
+        {
+        <div class="col-md-4">
+            <a class="btn btn-info w-100 py-3 text-white" asp-action="Recepcion">
+                📅 Agenda y Recepción de Pacientes
+            </a>
+        </div>
+        }
+    </div>
+</div>

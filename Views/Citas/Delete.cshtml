@@ -1,0 +1,26 @@
+@model Practica02MediWebMVC.Models.Cita
+@{
+    ViewData["Title"] = "Cancelar / Eliminar Cita";
+}
+
+<h1 class="text-danger">Eliminar Cita</h1>
+<div class="alert alert-warning mt-3">
+    <strong>¡Atención!</strong> Esta acción eliminará el registro de la cita permanentemente.
+</div>
+
+<div class="card mb-4 border-danger">
+    <div class="card-body">
+        <h5 class="card-title">¿Está seguro que desea eliminar esta cita programada?</h5>
+        <ul class="list-unstyled mt-3">
+            <li><strong>Paciente:</strong> @Model.PacienteNombre</li>
+            <li><strong>Médico:</strong> @Model.MedicoNombre</li>
+            <li><strong>Fecha y Hora:</strong> @Model.FechaHora.ToString("dd/MM/yyyy hh:mm tt")</li>
+            <li><strong>Motivo:</strong> @Model.Motivo</li>
+        </ul>
+    </div>
+</div>
+
+<form asp-action="Delete" asp-route-id="@Model.CitaId" method="post">
+    <button type="submit" class="btn btn-danger">Sí, eliminar permanentemente</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar y regresar</a>
+</form>

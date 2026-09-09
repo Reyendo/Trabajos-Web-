@@ -1,0 +1,64 @@
+@model Practica02MediWebMVC.Models.Cita
+@{
+    ViewData["Title"] = "Editar Cita";
+}
+
+<h1>Editar Cita</h1>
+<hr />
+<form asp-action="Edit" asp-route-id="@Model.CitaId" method="post" class="row g-3">
+
+    <!-- Identificador oculto crucial para el UPDATE -->
+    <input type="hidden" asp-for="CitaId" />
+
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="col-md-6">
+        <label asp-for="PacienteId" class="form-label"></label>
+        <select asp-for="PacienteId" asp-items="ViewBag.Pacientes" class="form-select"></select>
+        <span asp-validation-for="PacienteId" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-6">
+        <label asp-for="MedicoId" class="form-label"></label>
+        <select asp-for="MedicoId" asp-items="ViewBag.Medicos" class="form-select"></select>
+        <span asp-validation-for="MedicoId" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-4">
+        <label asp-for="ConsultorioId" class="form-label"></label>
+        <select asp-for="ConsultorioId" asp-items="ViewBag.Consultorios" class="form-select"></select>
+        <span asp-validation-for="ConsultorioId" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-4">
+        <label asp-for="FechaHora" class="form-label"></label>
+        <input asp-for="FechaHora" class="form-control" type="datetime-local" />
+        <span asp-validation-for="FechaHora" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-4">
+        <label asp-for="EstadoId" class="form-label"></label>
+        <select asp-for="EstadoId" asp-items="ViewBag.Estados" class="form-select"></select>
+        <span asp-validation-for="EstadoId" class="text-danger"></span>
+    </div>
+
+    <div class="col-12">
+        <label asp-for="Motivo" class="form-label"></label>
+        <input asp-for="Motivo" class="form-control" />
+        <span asp-validation-for="Motivo" class="text-danger"></span>
+    </div>
+
+    <div class="col-12">
+        <label asp-for="NotasMedicas" class="form-label"></label>
+        <textarea asp-for="NotasMedicas" class="form-control" rows="3"></textarea>
+    </div>
+
+    <div class="col-12 mt-4">
+        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
