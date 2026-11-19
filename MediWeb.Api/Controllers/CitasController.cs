@@ -31,7 +31,7 @@ public class CitasController : ControllerBase
     {
         var cita = await _service.GetByIdAsync(id);
         if (cita is null)
-            return NotFound(new { mensaje = "Cita médica no encontrada." });
+            return NotFound(new { mensaje = "Cita medica no encontrada." });
 
         return Ok(cita);
     }
@@ -60,7 +60,7 @@ public class CitasController : ControllerBase
         }
         catch (MySqlException ex) when (ex.Number == 1452)
         {
-            return BadRequest(new { mensaje = "El paciente, médico, consultorio o estado especificado no existe." });
+            return BadRequest(new { mensaje = "El paciente, medico, consultorio o estado especificado no existe." });
         }
     }
 

@@ -42,6 +42,7 @@ builder.Services.AddSwaggerGen(options =>
             Array.Empty<string>()
         }
     });
+
 });
 
 // Inyección de servicios del dominio clínico[cite: 6, 11]

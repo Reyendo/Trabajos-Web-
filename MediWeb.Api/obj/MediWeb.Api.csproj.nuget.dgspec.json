@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Users\\Pavilion\\Downloads\\Web2\\Mediweb.api\\MediWeb.Api.csproj": {}
+    "E:\\Users\\Pavilion\\Downloads\\Web2\\mediweb.api\\MediWeb.Api.csproj": {}
   },
   "projects": {
-    "E:\\Users\\Pavilion\\Downloads\\Web2\\Mediweb.api\\MediWeb.Api.csproj": {
+    "E:\\Users\\Pavilion\\Downloads\\Web2\\mediweb.api\\MediWeb.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Users\\Pavilion\\Downloads\\Web2\\Mediweb.api\\MediWeb.Api.csproj",
+        "projectUniqueName": "E:\\Users\\Pavilion\\Downloads\\Web2\\mediweb.api\\MediWeb.Api.csproj",
         "projectName": "MediWeb.Api",
-        "projectPath": "E:\\Users\\Pavilion\\Downloads\\Web2\\Mediweb.api\\MediWeb.Api.csproj",
+        "projectPath": "E:\\Users\\Pavilion\\Downloads\\Web2\\mediweb.api\\MediWeb.Api.csproj",
         "packagesPath": "C:\\Users\\Pavilion\\.nuget\\packages\\",
-        "outputPath": "E:\\Users\\Pavilion\\Downloads\\Web2\\Mediweb.api\\obj\\",
+        "outputPath": "E:\\Users\\Pavilion\\Downloads\\Web2\\mediweb.api\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\DevExpress 24.1\\Components\\Offline Packages",
@@ -69,7 +69,7 @@
             },
             "MySqlConnector": {
               "target": "Package",
-              "version": "[2.4.0, )"
+              "version": "[3.0.0, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",

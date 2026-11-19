@@ -1,5 +1,7 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MySqlConnector;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace MediWeb.Api.Controllers;
 
@@ -57,7 +59,14 @@ public class CatalogosController : ControllerBase
         const string sql = "SELECT id_estado AS id, nombre FROM Estado_Cita ORDER BY id_estado;";
         return Ok(await ConsultarAsync(sql));
     }
-
+    [AllowAnonymous]
+    [HttpGet("public/estados")]
+    public async Task<IActionResult> EstadosPublicos()
+    {
+        // Reutiliza la lógica o consulta directa a la tabla 'EstadoCita'
+        return Ok(await ConsultarAsync(
+            "SELECT id_estado AS id, nombre FROM Estado_Cita ORDER BY id_estado; "));
+    }
     private async Task<List<object>> ConsultarAsync(string sql)
     {
         var lista = new List<object>();
